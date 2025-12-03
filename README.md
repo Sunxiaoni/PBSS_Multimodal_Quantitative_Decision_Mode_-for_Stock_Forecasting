@@ -36,11 +36,14 @@ AAPL, MSFT, AMZN, GOOGL, META,
 TSLA, NVDA, NFLX, AMD, AVGO
 ```
 ---
+
 ## 🧬 Pipeline Overview
+
 ### 1. Market Data Layer
 - Incremental OHLCV ingestion
 - Stored as Parquet under data/market_raw/
 - Ensures reproducibility and avoids redundant downloads
+  
 ### 2. News Sentiment Layer
 - News crawling and FinBERT scoring
 - Daily aggregation (T+1 alignment)
@@ -49,6 +52,7 @@ TSLA, NVDA, NFLX, AMD, AVGO
 ```text
 data/sentiment_daily/sentiment_daily.parquet
 ```
+
 ### 3. Feature Engineering
 Includes:
 - Technical indicators (RSI, EMA/SMA, MACD, ATR, Bollinger Bands)
@@ -56,6 +60,7 @@ Includes:
 - NLP-derived sentiment signals
 - Target label: next-day return (```text
   target_ret_1d```)
+  
 ### 4. Model Training
 - XGBoost regression model per ticker
 - Saves:
@@ -63,6 +68,7 @@ Includes:
     *_pbss_xgb.pkl```)
   - Metadata (```text
     *_pbss_meta.json```)
+    
 ### 5. PBSS Decision Logic
 Maps forecasts + sentiment into trading actions.
 | Condition                                     | PBSS      |
@@ -79,7 +85,9 @@ Produces dashboard-ready Parquet files containing:
 - Predicted return
 - Sentiment features
 - PBSS signal
+  
 ---
+
 ## 🚀 Quick Start
 Install dependencies
 ```text
@@ -102,30 +110,42 @@ Outputs appear in:
 data/pbss_signals/
 ```
 ---
+
 ## 📊 Example PBSS Output
 |       Date |  Close | ret_1d | pred_ret | sent_mean_3d_ewm | PBSS  |
 | ---------: | -----: | -----: | -------: | ---------------: | :---- |
 | 2025-09-08 | 229.40 |  0.004 |    0.012 |             0.03 | Buy   |
 | 2025-09-09 | 231.10 | -0.003 |   -0.017 |            -0.24 | Stop  |
 | 2025-09-10 | 227.20 |  0.002 |    0.004 |             0.05 | Pause |
+
 ---
 ## 📈 Visualization
 ### Tableau Desktop & Cloud (to be update)
 ---
+
 ## 🧠 Methodology Summary
+
 ### Modeling
+
 - XGBoost regression
 - Time-series per ticker
 - Multimodal feature integration
+  
 ### Sentiment Features
+
 Extracted from FinBERT-scored news:
 - 1-day mean
 - 7-day positive ratio
 - 3-day EWM
 - Sentiment surprise
 - News volume
+  
 ### Signal Generation
+
 Return forecasting + sentiment → PBSS trading states.
+
 ---
+
 ## ✉️ Contact
+
 For questions or collaborations, feel free to reach out: sunhan933@gmail.com
