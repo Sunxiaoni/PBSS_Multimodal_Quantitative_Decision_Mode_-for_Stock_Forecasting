@@ -1,4 +1,4 @@
-# PBSS: Multimodal Quantitative Decision Model for Stock Forecasting
+# PBSS: Multimodal Quantitative Decision Model for Stock Forecasting (ongoing)
 
 **PBSS** (Pause–Buy–Sell–Stop) is a **multi-asset machine-learning trading signal system** that integrates:
 
